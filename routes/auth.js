@@ -19,6 +19,8 @@ router.post("/login", (req, res) => {
               message: "success",
               data: {
                 token: generateToken(user),
+                userId: user._id,
+                name: user.email,
               },
             });
           else res.status(403).json({ message: "password not match" });
