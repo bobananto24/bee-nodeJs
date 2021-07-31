@@ -22,4 +22,4 @@ db.on("error", () => {
 app.get("/", (req, res) => {
   res.send("Welcome!");
 });
-app.listen(process.env.PORT || 5000);
+app.listen(process.env.PORT || 3000);
