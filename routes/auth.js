@@ -8,13 +8,19 @@ const tokenSecret = "my-shit-secret";
 const middleware = require("./middleware");
 
 router.post("/login", (req, res) => {
-  User.findOne({ email: req.body.email })
+  User.findOne({ email: req.body.email.toUpperCase() })
     .then((user) => {
       if (!user) res.status(404).json({ message: "user not found" });
       else {
         bcrypt.compare(req.body.password, user.password, (error, match) => {
           if (error) res.status(500).json(error);
-          else if (match) res.status(200).json(user);
+          else if (match)
+            res.status(200).json({
+              message: "success",
+              data: {
+                token: generateToken(user),
+              },
+            });
           else res.status(403).json({ message: "password not match" });
         });
       }
@@ -26,7 +32,11 @@ router.post("/signup", (req, res) => {
   bcrypt.hash(req.body.password, rounds, (error, hash) => {
     if (error) res.status(500).json(error);
     else {
-      const newUser = User({ email: req.body.email, password: hash });
+      const newUser = User({
+        email: req.body.email.toUpperCase(),
+        password: hash,
+        phone: req.body.phone,
+      });
       newUser
         .save()
         .then((user) => {
@@ -34,6 +44,11 @@ router.post("/signup", (req, res) => {
         })
         .catch((err) => res.status(500).json(error));
     }
+  });
+});
+router.get("/re-auth", middleware.verify, (req, res) => {
+  res.status(200).json({
+    message: "success",
   });
 });
 

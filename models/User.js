@@ -8,6 +8,10 @@ const UserSchema = mongoose.Schema({
     type: String,
     required: true,
   },
+  phone: {
+    type: Number,
+    required: false,
+  },
 });
 
 module.exports = new mongoose.model("User", UserSchema);
