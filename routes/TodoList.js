@@ -1,4 +1,5 @@
 const express = require("express");
+const moment = require("moment");
 const router = express.Router();
 const Todo = require("../models/Todo");
 const middleware = require("./middleware");
@@ -7,7 +8,7 @@ router.post("/addTodo/:userId", middleware.verify, async (req, res) => {
   const newTodo = new Todo({
     name: req.body.name,
     userId: req.params.userId,
-    time: new Date(),
+    time: moment().format("lll"),
   });
   try {
     const todo = await newTodo.save();
