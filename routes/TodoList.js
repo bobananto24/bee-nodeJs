@@ -4,7 +4,11 @@ const Todo = require("../models/Todo");
 const middleware = require("./middleware");
 
 router.post("/addTodo/:userId", middleware.verify, async (req, res) => {
-  const newTodo = new Todo({ name: req.body.name, userId: req.params.userId });
+  const newTodo = new Todo({
+    name: req.body.name,
+    userId: req.params.userId,
+    time: new Date(),
+  });
   try {
     const todo = await newTodo.save();
     res.status(200).json({ data: todo });
