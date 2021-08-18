@@ -5,9 +5,13 @@ const DBuri =
   "mongodb+srv://boban24:bobananto24@boban.pmao6.mongodb.net/TODO?retryWrites=true&w=majority";
 const authRoute = require("./routes/auth");
 const todoRoute = require("./routes/TodoList");
+const titleRoute = require("./routes/TitleList");
+
 app.use(express.json());
 app.use("/api/auth", authRoute);
 app.use("/api", todoRoute);
+app.use("/api", titleRoute);
+
 mongoose.connect(DBuri, {
   useNewUrlParser: true,
   useUnifiedTopology: true,

@@ -1,5 +1,5 @@
 var mongoose = require("mongoose");
-const TodoSchema = mongoose.Schema({
+const TitleSchema = mongoose.Schema({
   name: {
     type: String,
     required: true,
@@ -9,10 +9,17 @@ const TodoSchema = mongoose.Schema({
     required: true,
     default: false,
   },
-  titleId: {
+  time: {
     type: String,
     required: true,
   },
+  userId: {
+    type: String,
+    required: true,
+  },
+  list: {
+    type: Array,
+  },
 });
 
-module.exports = new mongoose.model("Todo", TodoSchema);
+module.exports = new mongoose.model("Title", TitleSchema);
