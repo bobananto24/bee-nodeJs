@@ -20,7 +20,7 @@ router.post("/addTodo/:titleId", middleware.verify, async (req, res) => {
 
   try {
     const todo = await sub.save();
-    res.status(200).json({ data: todo });
+    res.status(200).json({ data: todo, message: "success" });
   } catch (e) {
     res.status(500).json(e);
   }
@@ -57,7 +57,7 @@ router.patch(
       });
       sub.list = newList;
       await sub.save();
-      res.status(200).json({ data: "success" });
+      res.status(200).json({ message: "Todo updated" });
     } catch (e) {
       res.status(500).json(e);
     }
