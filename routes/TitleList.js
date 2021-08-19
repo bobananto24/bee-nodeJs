@@ -47,12 +47,4 @@ router.patch("/updateTitle/:titleId", middleware.verify, async (req, res) => {
     res.status(500).json(e);
   }
 });
-router.get("/nested/", async (req, res) => {
-  try {
-    const list = await Todo.find();
-    res.status(200).json({ data: list });
-  } catch (e) {
-    res.status(500).json(e);
-  }
-});
 module.exports = router;
